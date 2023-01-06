@@ -1,0 +1,17 @@
+name: frontend docs
+
+on:
+  schedule:
+    - cron: "0/6"  # Call the export every 6 hours
+  workflow_dispatch: {}
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: igor-kupczynski/notion-exporter@v1.0.2
+        with:
+          pages: "915beb8b0e664d3c9adbe8f66bb2e95c"  # Pages IDs identified in (step 2)  
+          output-dir: notion-backup
+          notion-token: ${{ secrets.NOTION_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
